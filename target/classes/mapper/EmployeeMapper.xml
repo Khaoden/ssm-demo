@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.EmployeeMapper">
+    <insert id="addEmp" parameterType="com.example.demo.bean.Employee">
+        INSERT INTO employee(name, age, email, gender, birth, dept_id)
+        VALUES(#{name}, #{age}, #{email}, #{gender}, #{birth}, #{deptId})
+    </insert>
+
+    <update id="updateEmployee" parameterType="com.example.demo.bean.Employee">
+        UPDATE employee
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null">birth = #{birth},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteEmployeeById">
+        DELETE FROM employee WHERE id = #{id}
+    </delete>
+
+    <select id="getEmployeeById" resultType="com.example.demo.bean.Employee">
+        SELECT * FROM employee WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultType="com.example.demo.bean.Employee">
+        SELECT * FROM employee
+    </select>
+</mapper>
